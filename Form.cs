@@ -12,11 +12,12 @@ using System.Windows.Forms;
 
 namespace ServerGUI
 {
-    public partial class Form1 : Form
+    public partial class Form : System.Windows.Forms.Form
     {
-        public Form1()
+        public Form()
         {
             InitializeComponent();
+            this.Text = "Сервер лицензий v1.0.0";
         }
 
         private void StartBtn_Click(object sender, EventArgs e)
@@ -27,10 +28,15 @@ namespace ServerGUI
 
                 myProcess.StartInfo.FileName = txbServer.Text;
 
-                var portStr = txbPort.Text;
-                var logStr = txbLog.Text;
+                var ipClientsDgvrs = new List<DataGridViewRow>(dgv.Rows.Cast<DataGridViewRow>());
 
-                var argStr = string.Join(" ", new string[] { portStr, logStr });
+                if (ipClientsDgvrs.Count == 0)
+                    throw new Exception("Укажите хотя бы одного клиента!");
+
+                var ipClientsList = ipClientsDgvrs.Select(x => x.Cells[0].Value.ToString()).ToList();
+                var ipClientsStr = string.Join(";", ipClientsList);
+
+                var argStr = string.Join(" ", new string[] { txbKey.Text, txbPort.Text, ipClientsStr, txbLog.Text });
 
                 myProcess.StartInfo.Arguments = argStr;
                 myProcess.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
@@ -46,8 +52,6 @@ namespace ServerGUI
         {
             try
             {
-
-
                 var fileStream = new StreamReader(txbLog.Text);
 
                 richTextBox.Clear();
@@ -71,6 +75,41 @@ namespace ServerGUI
             {
                 process.Kill();
             }
+        }
+
+        private void addClient_Click(object sender, EventArgs e)
+        {
+            dgv.Rows.Add();
+        }
+
+        private void txbServer_Click(object sender, EventArgs e)
+        {
+            var openDialog = new OpenFileDialog();
+
+            if (openDialog.ShowDialog() == DialogResult.Cancel)
+                return;
+
+            txbServer.Text = openDialog.FileName;
+        }
+
+        private void txbLog_Click(object sender, EventArgs e)
+        {
+            var openDialog = new OpenFileDialog();
+
+            if (openDialog.ShowDialog() == DialogResult.Cancel)
+                return;
+
+            txbLog.Text = openDialog.FileName;
+        }
+
+        private void txbKey_Click(object sender, EventArgs e)
+        {
+            var openDialog = new OpenFileDialog();
+
+            if (openDialog.ShowDialog() == DialogResult.Cancel)
+                return;
+
+            txbKey.Text = openDialog.FileName;
         }
     }
 }
