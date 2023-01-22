@@ -19,7 +19,7 @@ namespace ServerGUI
             InitializeComponent();
         }
 
-        private void btn_Click(object sender, EventArgs e)
+        private void StartBtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace ServerGUI
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void InfoBtb_Click(object sender, EventArgs e)
         {
             try
             {
@@ -50,19 +50,26 @@ namespace ServerGUI
 
                 var fileStream = new StreamReader(txbLog.Text);
 
-                richTextBox1.Clear();
+                richTextBox.Clear();
                 var str = "";
                 while (str != null)
                 {
                     str = fileStream.ReadLineAsync().Result;
-                    richTextBox1.AppendText("\n" + str);
+                    richTextBox.AppendText("\n" + str);
                 }
                 fileStream.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
-
+        private void StopBtn_Click(object sender, EventArgs e)
+        {
+            foreach (var process in Process.GetProcessesByName("BazisServer"))
+            {
+                process.Kill();
             }
         }
     }
