@@ -74,6 +74,12 @@ namespace ServerGUI
             foreach (var process in Process.GetProcessesByName("BazisServer"))
             {
                 process.Kill();
+
+                var sw = new StreamWriter(txbLog.Text,true);
+
+                sw.WriteLine("Сервер остановлен");
+                sw.Close();
+                sw.Dispose();
             }
         }
 
