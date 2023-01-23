@@ -34,9 +34,14 @@ namespace ServerGUI
                     throw new Exception("Укажите хотя бы одного клиента!");
 
                 var ipClientsList = ipClientsDgvrs.Select(x => x.Cells[0].Value.ToString()).ToList();
-                var ipClientsStr = string.Join(";", ipClientsList);
+                var ipClients = string.Join(";", ipClientsList);
 
-                var argStr = string.Join(" ", new string[] { txbKey.Text, txbPort.Text, ipClientsStr, txbLog.Text });
+                var keyStr = $"{txbKey.Text}";
+                var portStr = $"{txbPort.Text}";
+                var ipClientsStr = $"{ipClients}";
+                var logStr = $"{txbLog.Text}";
+
+                var argStr = string.Join(" ", new string[] { keyStr, portStr, ipClientsStr, logStr });
 
                 myProcess.StartInfo.Arguments = argStr;
                 myProcess.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
