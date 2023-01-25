@@ -17,7 +17,6 @@ namespace ServerGUI
         public Form()
         {
             InitializeComponent();
-            this.Text = "Сервер лицензий v1.0.0";
         }
 
         private void StartBtn_Click(object sender, EventArgs e)
@@ -28,6 +27,9 @@ namespace ServerGUI
 
                 myProcess.StartInfo.FileName = txbServer.Text;
 
+                if (chbRunOnBackGround.Checked)
+                    myProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+
                 var ipClientsDgvrs = new List<DataGridViewRow>(dgv.Rows.Cast<DataGridViewRow>());
 
                 if (ipClientsDgvrs.Count == 0)
@@ -36,15 +38,14 @@ namespace ServerGUI
                 var ipClientsList = ipClientsDgvrs.Select(x => x.Cells[0].Value.ToString()).ToList();
                 var ipClients = string.Join(";", ipClientsList);
 
-                var keyStr = $"{txbKey.Text}";
-                var portStr = $"{txbPort.Text}";
-                var ipClientsStr = $"{ipClients}";
-                var logStr = $"{txbLog.Text}";
+                var keyStr = $"\"{txbKey.Text}\"";
+                var portStr = $"\"{txbPort.Text}\"";
+                var ipClientsStr = $"\"{ipClients}\"";
+                var logStr = $"\"{txbLog.Text}\"";
 
                 var argStr = string.Join(" ", new string[] { keyStr, portStr, ipClientsStr, logStr });
 
                 myProcess.StartInfo.Arguments = argStr;
-                myProcess.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
                 myProcess.Start();
             }
             catch (Exception ex)
