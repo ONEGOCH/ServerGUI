@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1684
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerGUI", "ServerGUI.csproj", "{AF51D305-FFA8-4644-ADD7-1FB85FF59D75}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceServer", "ServiceServer.csproj", "{3B700689-09F6-4B05-8EFC-ABFDD650ABD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceServer", "ServerService\ServiceServer.csproj", "{3B700689-09F6-4B05-8EFC-ABFDD650ABD5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerLogic", "ServerService\ServerLogic\ServerLogic.csproj", "{08AB9AB5-ED4C-4777-9E0F-2A08AFE19A41}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerLogic", "ServerLogic\ServerLogic.csproj", "{08AB9AB5-ED4C-4777-9E0F-2A08AFE19A41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AF51D305-FFA8-4644-ADD7-1FB85FF59D75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF51D305-FFA8-4644-ADD7-1FB85FF59D75}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF51D305-FFA8-4644-ADD7-1FB85FF59D75}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF51D305-FFA8-4644-ADD7-1FB85FF59D75}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3B700689-09F6-4B05-8EFC-ABFDD650ABD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3B700689-09F6-4B05-8EFC-ABFDD650ABD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B700689-09F6-4B05-8EFC-ABFDD650ABD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -32,6 +26,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {1432E195-67BE-469B-A9DE-6C861536E42F}
+		SolutionGuid = {357A7740-9A37-42F4-9BAF-31503DD42893}
 	EndGlobalSection
 EndGlobal
