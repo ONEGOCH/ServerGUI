@@ -43,9 +43,9 @@ namespace ServerLogic
             Console.WriteLine($"Сервер запущен. IP : {localIp} {DateTime.Now}");
             Console.WriteLine("Не закрывайте приложение...");
 
-            streamWriter = new StreamWriter(logFile, true);
-            streamWriter.AutoFlush = true;
-            Console.SetOut(streamWriter);
+            //streamWriter = new StreamWriter(logFile, true);
+            //streamWriter.AutoFlush = true;
+            //Console.SetOut(streamWriter);
 
             tcpListener = new TcpListener(localIp, port);
             try
@@ -65,6 +65,7 @@ namespace ServerLogic
             catch (Exception ex)
             {
                 Console.WriteLine($"Ошибка : {ex.Message} {DateTime.Now}");
+                Console.ReadLine();
             }
         }
 

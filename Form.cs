@@ -26,7 +26,7 @@ namespace ServerGUI
                 var process = new Process();
                 var startInfo = new ProcessStartInfo
                 {
-                    WindowStyle = ProcessWindowStyle.Hidden,
+                    WindowStyle = ProcessWindowStyle.Normal,
                     FileName = "cmd.exe",
                     Arguments =
                         $@"/C C:\Windows\Microsoft.NET\Framework{bit}\v4.0.30319\InstallUtil.exe {Directory.GetCurrentDirectory()}\ServiceServer.exe"
@@ -86,7 +86,7 @@ namespace ServerGUI
             {
                 WindowStyle = ProcessWindowStyle.Hidden,
                 FileName = "cmd.exe",
-                Arguments = @"/C sc stop LicenseServer"
+                Arguments = @"/C sc stop BazisServer"
             };
             process.StartInfo = startInfo;
             process.Start();
@@ -109,7 +109,7 @@ namespace ServerGUI
             {
                 WindowStyle = ProcessWindowStyle.Hidden,
                 FileName = "cmd.exe",
-                Arguments = @"/C sc delete LicenseServer"
+                Arguments = @"/C sc delete BazisServer"
             };
             process.StartInfo = startInfo;
             process.Start();
