@@ -29,6 +29,7 @@ namespace ServerGUI
                 Arguments =
                     $@"/C C:\Windows\Microsoft.NET\Framework{bit}\v4.0.30319\InstallUtil.exe {Directory.GetCurrentDirectory()}\ServiceServer.exe"
             };
+            startInfo.Verb = "runas";
             process.StartInfo = startInfo;
             var config = new ServiceConfig
             {
@@ -111,6 +112,7 @@ namespace ServerGUI
                 FileName = "cmd.exe",
                 Arguments = @"/C sc stop LicenseServer"
             };
+            startInfo.Verb = "runas";
             process.StartInfo = startInfo;
             process.Start();
             // foreach (var process in Process.GetProcessesByName("BazisServer"))
@@ -134,6 +136,7 @@ namespace ServerGUI
                 FileName = "cmd.exe",
                 Arguments = @"/C sc delete LicenseServer"
             };
+            startInfo.Verb = "runas";
             process.StartInfo = startInfo;
             process.Start();
         }
