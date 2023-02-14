@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 
 namespace ServerLogic
 {
+    [Serializable]
     public class ServiceConfig
     {
         public string licFile;

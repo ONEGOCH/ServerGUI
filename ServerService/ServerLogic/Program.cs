@@ -8,7 +8,7 @@ namespace ServerLogic
         public static void Main(string[] args)
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-            var service = new Service();
+            var service = new Service(args);
             service.StartServer();
         }
     }

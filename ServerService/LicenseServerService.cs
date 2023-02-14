@@ -7,7 +7,7 @@ namespace ServiceServer
     public partial class LicenseServerService : ServiceBase
     {
         private Service service;
-
+        public static string name;
         public LicenseServerService()
         {
             InitializeComponent();
@@ -16,7 +16,7 @@ namespace ServiceServer
 
         protected override void OnStart(string[] args)
         {
-            service = new Service();
+            service = new Service(args);
             new Thread(service.StartServer).Start();
         }
 

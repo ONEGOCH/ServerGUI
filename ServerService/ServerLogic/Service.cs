@@ -4,53 +4,71 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace ServerLogic
 {
     public class Service
     {
-        private readonly string licFile;
-        private readonly int port;
-        private readonly List<string> clientsIp;
-        private readonly string logFile;
-        
+        private string licFile;
+        private int port;
+        private List<string> clientsIp;
+        private string logFile;
+        private IPAddress localIp;
+        private string[] args;
+
         private readonly TcpListener tcpListener;
         private readonly StreamWriter streamWriter;
         private bool enable;
 
-        public Service()
+        public Service(string[] args)
         {
-            var builder = new StringBuilder();
-            using (var file = File.OpenRead("serverConfig.json"))
+            this.args = args;
+            var serverConfig =
+                (ServiceConfig)JsonConvert.DeserializeObject(
+                    File.ReadAllText(
+                        $@"{Environment.GetEnvironmentVariable("LicenseServerPath", EnvironmentVariableTarget.Machine)}\serverConfig.json"),
+                    typeof(ServiceConfig));
+            if (serverConfig != null)
             {
-                builder.Append(Convert.ToChar(file.ReadByte()));
+                licFile = serverConfig.licFile;
+                port = int.Parse(serverConfig.port);
+                clientsIp = serverConfig.clientsIp;
+                logFile = serverConfig.logFile;
             }
-            var serverConfig = JsonSerializer.Deserialize<ServiceConfig>(builder.ToString());
-            licFile = serverConfig.licFile;
-            port = int.Parse(serverConfig.port);
-            clientsIp = serverConfig.clientsIp;
-            logFile = serverConfig.logFile;
+            else
+                throw new SerializationException();
+
             enable = true;
 
             var host = Dns.GetHostName();
-            //Получение ip-адреса.
-            var localIp = Dns.GetHostEntry(host).AddressList[1];
-
-            Console.WriteLine($"Сервер запущен. IP : {localIp} {DateTime.Now}");
-            Console.WriteLine("Не закрывайте приложение...");
+            localIp = Dns.GetHostEntry(host).AddressList[1];
 
             streamWriter = new StreamWriter(logFile, true);
             streamWriter.AutoFlush = true;
             Console.SetOut(streamWriter);
 
             tcpListener = new TcpListener(localIp, port);
+        }
+
+        public void StopServer()
+        {
+            tcpListener.Stop();
+            streamWriter.Close();
+            enable = false;
+            File.AppendAllText(logFile, "Сервер остановлен");
+        }
+
+        public void StartServer()
+        {
             try
             {
-                if (CheckLicense(licFile, out var licenseInfo))
+                if (CheckLicense(licFile, out LicenseInfo licenseInfo))
                 {
                     tcpListener.Start(); // запускаем сервер
                     Console.WriteLine($"Сервер запущен. IP : {localIp} {DateTime.Now}");
@@ -59,6 +77,15 @@ namespace ServerLogic
                     Console.WriteLine(licenseInfo.KeyInfo.ToString());
                     Console.WriteLine(licenseInfo.CompanyName);
                     Console.WriteLine("Ожидание подключений... ");
+                    streamWriter.Close();
+                    streamWriter.Dispose();
+
+                    while (enable)
+                    {
+                        // ждем подключения в виде TcpClient
+                        var tcpClient = tcpListener.AcceptTcpClient();
+                        new Thread(async () => await ProcessClientAsync(tcpClient)).Start();
+                    }
                 }
                 else Console.WriteLine("Не найден подходящий сетевой адрес оборудования");
             }
@@ -66,23 +93,9 @@ namespace ServerLogic
             {
                 Console.WriteLine($"Ошибка : {ex.Message} {DateTime.Now}");
             }
-        }
-
-        public void StopServer()
-        {
-            tcpListener.Stop();
-            streamWriter.Close();
-            enable = false;
-            Console.WriteLine("Сервер остановлен");
-        }
-
-        public void StartServer()
-        {
-            while (enable)
+            finally
             {
-                // ждем подключения в виде TcpClient
-                var tcpClient = tcpListener.AcceptTcpClient();
-                new Thread(async () => await ProcessClientAsync(tcpClient)).Start();
+                Console.WriteLine("Сервер остановлен");
             }
         }
 
