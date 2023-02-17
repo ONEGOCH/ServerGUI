@@ -34,6 +34,12 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
+        <Reference Include="Algorithm">
+          <HintPath>..\..\libs\Algorithm.dll</HintPath>
+        </Reference>
+        <Reference Include="LicenseData">
+          <HintPath>..\..\libs\LicenseData.dll</HintPath>
+        </Reference>
         <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
           <HintPath>..\..\packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\netstandard2.0\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
         </Reference>
@@ -44,6 +50,9 @@
           <HintPath>..\packages\MSTest.TestFramework.3.0.2\lib\netstandard2.0\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
         </Reference>
         <Reference Include="mscorlib" />
+        <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+          <HintPath>..\..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+        </Reference>
         <Reference Include="System" />
         <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
           <HintPath>..\..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -72,23 +81,24 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Edition.cs" />
-        <Compile Include="KeyInfo.cs" />
-        <Compile Include="KeyManager.cs" />
-        <Compile Include="LicenseInfo.cs" />
-        <Compile Include="LicenseKind.cs" />
-        <Compile Include="LicenseType.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="RC4.cs" />
         <Compile Include="Service.cs" />
         <Compile Include="ServiceConfig.cs" />
-        <Compile Include="SwapExt.cs" />
-        <Compile Include="Token.cs" />
     </ItemGroup>
     <ItemGroup>
       <None Include="App.config" />
       <None Include="packages.config" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\..\LicenseData\Algorithm\Algorithm.csproj">
+        <Project>{64f22789-fc2d-482b-a427-f88fe286ba17}</Project>
+        <Name>Algorithm</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\..\LicenseData\LicenseData.csproj">
+        <Project>{cd4978aa-3c13-40a1-b732-ef66ac11093a}</Project>
+        <Name>LicenseData</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

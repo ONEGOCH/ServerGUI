@@ -9,6 +9,7 @@ namespace ServiceServer
     {
         ServiceInstaller serviceInstaller;
         ServiceProcessInstaller processInstaller;
+        public static string name;
         public InstallerServiceServer()
         {
             InitializeComponent();
@@ -17,7 +18,8 @@ namespace ServiceServer
             
             processInstaller.Account = ServiceAccount.LocalSystem;
             serviceInstaller.StartType = ServiceStartMode.Automatic;
-            serviceInstaller.ServiceName = "LicenseServer";
+            serviceInstaller.ServiceName = "LicenseService";
+            
             Installers.Add(processInstaller);
             Installers.Add(serviceInstaller);
         }

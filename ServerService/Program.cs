@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.ServiceProcess;
 using System.Text;
@@ -14,6 +15,7 @@ namespace ServiceServer
         /// </summary>
         static void Main()
         {
+            File.WriteAllText("log.txt","test");
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {

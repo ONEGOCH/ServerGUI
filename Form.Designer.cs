@@ -30,23 +30,21 @@
         {
             this.btnInfo = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.chbRunOnBackGround = new System.Windows.Forms.CheckBox();
             this.richTextBox = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.addClient = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txbKey = new System.Windows.Forms.TextBox();
             this.txbLog = new System.Windows.Forms.TextBox();
-            this.txbServer = new System.Windows.Forms.TextBox();
             this.txbPort = new System.Windows.Forms.TextBox();
             this.dgv = new System.Windows.Forms.DataGridView();
             this.IpAdr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnStart = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.btnCreate = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -70,14 +68,14 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 233F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 233F));
-            this.tableLayoutPanel1.Controls.Add(this.chbRunOnBackGround, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.richTextBox, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.dgv, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnStart, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.btnStop, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.btnInfo, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.btnDelete, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnCreate, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnStart, 1, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
@@ -90,18 +88,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(743, 634);
             this.tableLayoutPanel1.TabIndex = 1;
-            // 
-            // chbRunOnBackGround
-            // 
-            this.chbRunOnBackGround.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.chbRunOnBackGround.AutoSize = true;
-            this.chbRunOnBackGround.Location = new System.Drawing.Point(281, 540);
-            this.chbRunOnBackGround.Margin = new System.Windows.Forms.Padding(4);
-            this.chbRunOnBackGround.Name = "chbRunOnBackGround";
-            this.chbRunOnBackGround.Size = new System.Drawing.Size(225, 41);
-            this.chbRunOnBackGround.TabIndex = 4;
-            this.chbRunOnBackGround.Text = "Запуск в фоновом режиме";
-            this.chbRunOnBackGround.UseVisualStyleBackColor = true;
             // 
             // richTextBox
             // 
@@ -122,23 +108,21 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.addClient);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.txbKey);
             this.panel1.Controls.Add(this.txbLog);
-            this.panel1.Controls.Add(this.txbServer);
             this.panel1.Controls.Add(this.txbPort);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(281, 4);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(458, 254);
+            this.panel1.Size = new System.Drawing.Size(458, 202);
             this.panel1.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 158);
+            this.label1.Location = new System.Drawing.Point(19, 106);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 17);
@@ -148,7 +132,7 @@
             // addClient
             // 
             this.addClient.AutoSize = true;
-            this.addClient.Location = new System.Drawing.Point(4, 209);
+            this.addClient.Location = new System.Drawing.Point(4, 157);
             this.addClient.Margin = new System.Windows.Forms.Padding(4, 4, 4, 12);
             this.addClient.Name = "addClient";
             this.addClient.Size = new System.Drawing.Size(187, 33);
@@ -160,22 +144,12 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 110);
+            this.label4.Location = new System.Drawing.Point(19, 59);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(31, 17);
             this.label4.TabIndex = 1;
             this.label4.Text = "Лог";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 62);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 17);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Сервер";
             // 
             // label2
             // 
@@ -190,7 +164,7 @@
             // txbKey
             // 
             this.txbKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.txbKey.Location = new System.Drawing.Point(4, 177);
+            this.txbKey.Location = new System.Drawing.Point(4, 127);
             this.txbKey.Margin = new System.Windows.Forms.Padding(4);
             this.txbKey.Name = "txbKey";
             this.txbKey.Size = new System.Drawing.Size(452, 22);
@@ -200,24 +174,13 @@
             // txbLog
             // 
             this.txbLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.txbLog.Location = new System.Drawing.Point(4, 129);
+            this.txbLog.Location = new System.Drawing.Point(4, 80);
             this.txbLog.Margin = new System.Windows.Forms.Padding(4);
             this.txbLog.Name = "txbLog";
             this.txbLog.Size = new System.Drawing.Size(452, 22);
             this.txbLog.TabIndex = 0;
             this.txbLog.Text = "C:\\ClientServerModel\\log";
             this.txbLog.Click += new System.EventHandler(this.txbLog_Click);
-            // 
-            // txbServer
-            // 
-            this.txbServer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.txbServer.Location = new System.Drawing.Point(4, 81);
-            this.txbServer.Margin = new System.Windows.Forms.Padding(4);
-            this.txbServer.Name = "txbServer";
-            this.txbServer.Size = new System.Drawing.Size(452, 22);
-            this.txbServer.TabIndex = 0;
-            this.txbServer.Text = "C:\\ClientServerModel\\Server\\bin\\Release\\Server.exe";
-            this.txbServer.Click += new System.EventHandler(this.txbServer_Click);
             // 
             // txbPort
             // 
@@ -235,10 +198,10 @@
             this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.IpAdr });
             this.tableLayoutPanel1.SetColumnSpan(this.dgv, 2);
             this.dgv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv.Location = new System.Drawing.Point(281, 266);
+            this.dgv.Location = new System.Drawing.Point(281, 214);
             this.dgv.Margin = new System.Windows.Forms.Padding(4);
             this.dgv.Name = "dgv";
-            this.dgv.Size = new System.Drawing.Size(458, 266);
+            this.dgv.Size = new System.Drawing.Size(458, 318);
             this.dgv.TabIndex = 4;
             // 
             // IpAdr
@@ -246,18 +209,6 @@
             this.IpAdr.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.IpAdr.HeaderText = "IP адреса клиентов";
             this.IpAdr.Name = "IpAdr";
-            // 
-            // btnStart
-            // 
-            this.btnStart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnStart.Location = new System.Drawing.Point(281, 589);
-            this.btnStart.Margin = new System.Windows.Forms.Padding(4);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(225, 41);
-            this.btnStart.TabIndex = 1;
-            this.btnStart.Text = "Старт";
-            this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(this.StartBtn_Click);
             // 
             // btnStop
             // 
@@ -283,6 +234,29 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.DeleteBtn_Click);
             // 
+            // btnCreate
+            // 
+            this.btnCreate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnCreate.Location = new System.Drawing.Point(281, 540);
+            this.btnCreate.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(225, 41);
+            this.btnCreate.TabIndex = 1;
+            this.btnCreate.Text = "Создать";
+            this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
+            // 
+            // btnStart
+            // 
+            this.btnStart.Location = new System.Drawing.Point(281, 589);
+            this.btnStart.Margin = new System.Windows.Forms.Padding(4);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(225, 41);
+            this.btnStart.TabIndex = 1;
+            this.btnStart.Text = "Старт";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -301,19 +275,19 @@
             this.ResumeLayout(false);
         }
 
+        private System.Windows.Forms.Button btnStart;
+
         private System.Windows.Forms.Button btnDelete;
 
         #endregion
 
         private System.Windows.Forms.Button btnInfo;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button btnCreate;
         private System.Windows.Forms.RichTextBox richTextBox;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txbPort;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txbServer;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txbLog;
         private System.Windows.Forms.DataGridView dgv;
@@ -322,7 +296,7 @@
         private System.Windows.Forms.Button addClient;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txbKey;
-        private System.Windows.Forms.CheckBox chbRunOnBackGround;
+        //private System.Windows.Forms.CheckBox chbRunOnBackGround;
     }
 }
 

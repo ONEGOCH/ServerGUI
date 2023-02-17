@@ -4,9 +4,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 using ServerLogic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+
+//using System.Text.Json;
+//using System.Text.Json.Serialization;
 
 namespace ServerGUI
 {
@@ -17,46 +19,70 @@ namespace ServerGUI
             InitializeComponent();
         }
 
-        private void StartBtn_Click(object sender, EventArgs e)
+        private void btnCreate_Click(object sender, EventArgs e)
         {
-            try
+            var bit = Environment.Is64BitOperatingSystem ? "64" : "";
+            richTextBox.AppendText("Создание сервиса \n");
+            var config = new ServiceConfig
             {
-                var bit = Environment.Is64BitOperatingSystem ? "64" : "";
+                port = txbPort.Text,
+                clientsIp = new List<DataGridViewRow>(dgv.Rows.Cast<DataGridViewRow>())
+                    .Select(x => x.Cells[0].Value.ToString())
+                    .ToList(),
+                licFile = txbKey.Text,
+                logFile = txbLog.Text
+            };
+            var configString = JsonConvert.SerializeObject(config);
+            File.WriteAllText("serverConfig.json", configString);
+            if (config.clientsIp.Count == 0)
+                throw new Exception("Укажите хотя бы одного клиента!");
 
-                var process = new Process();
-                var startInfo = new ProcessStartInfo
-                {
-                    WindowStyle = ProcessWindowStyle.Normal,
-                    FileName = "cmd.exe",
-                    Arguments =
-                        $@"/C C:\Windows\Microsoft.NET\Framework{bit}\v4.0.30319\InstallUtil.exe {Directory.GetCurrentDirectory()}\ServiceServer.exe"
-                };
-                process.StartInfo = startInfo;
-                var config = new ServiceConfig
-                {
-                    port = txbPort.Text,
-                    clientsIp = new List<DataGridViewRow>(dgv.Rows.Cast<DataGridViewRow>())
-                        .Select(x => x.Cells[0].Value.ToString())
-                        .ToList(),
-                    licFile = txbKey.Text,
-                    logFile = txbLog.Text
-                };
-                var configString = JsonSerializer.Serialize(config);
-                using (var file = File.Open("serverConfig.json", FileMode.OpenOrCreate))
-                    foreach (var symbol in configString)
-                        file.WriteByte(Convert.ToByte(symbol));
-                if (config.clientsIp.Count == 0)
-                    throw new Exception("Укажите хотя бы одного клиента!");
-
-                process.Start();
-
-            }
-            catch (Exception ex)
+            var process = new Process();
+            var currentDirectory = Directory.GetCurrentDirectory();
+            var startInfo = new ProcessStartInfo
             {
-                MessageBox.Show(ex.Message);
-            }           
+                WindowStyle = ProcessWindowStyle.Hidden,
+                FileName = "cmd.exe",
+                Arguments =
+                    $@"/C setx /m LicenseServerPath {currentDirectory} && C:\Windows\Microsoft.NET\Framework{bit}\v4.0.30319\InstallUtil.exe {currentDirectory}\ServiceServer.exe",
+                Verb = "runas"
+            };
+            process.StartInfo = startInfo;
+
+            process.Start();
+            richTextBox.AppendText("\n Сервис создан \n");
+            // try
+            // {
+            //     var myProcess = new Process();
+            //
+            //     myProcess.StartInfo.FileName = txbServer.Text;
+            //
+            //     if (chbRunOnBackGround.Checked)
+            //         myProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            //
+            //     var ipClientsDgvrs = new List<DataGridViewRow>(dgv.Rows.Cast<DataGridViewRow>());
+            //
+            //     
+            //
+            //     var ipClientsList = ipClientsDgvrs.Select(x => x.Cells[0].Value.ToString()).ToList();
+            //     var ipClients = string.Join(";", ipClientsList);
+            //
+            //     var keyStr = $"\"{txbKey.Text}\"";
+            //     var portStr = $"\"{txbPort.Text}\"";
+            //     var ipClientsStr = $"\"{ipClients}\"";
+            //     var logStr = $"\"{txbLog.Text}\"";
+            //
+            //     var argStr = string.Join(" ", new string[] { keyStr, portStr, ipClientsStr, logStr });
+            //
+            //     myProcess.StartInfo.Arguments = argStr;
+            //     myProcess.Start();
+            // }
+            // catch (Exception ex)
+            // {
+            //     MessageBox.Show(ex.Message);
+            // }
         }
-
+        
         private void InfoBtb_Click(object sender, EventArgs e)
         {
             try
@@ -81,15 +107,17 @@ namespace ServerGUI
 
         private void StopBtn_Click(object sender, EventArgs e)
         {
+            richTextBox.AppendText("\n Остановка сервиса \n");
             var process = new Process();
             var startInfo = new ProcessStartInfo
             {
                 WindowStyle = ProcessWindowStyle.Hidden,
                 FileName = "cmd.exe",
-                Arguments = @"/C sc stop BazisServer"
+                Arguments = @"/C sc stop LicenseServer"
             };
             process.StartInfo = startInfo;
             process.Start();
+            richTextBox.AppendText("\n Сервис остановлен \n");
             // foreach (var process in Process.GetProcessesByName("BazisServer"))
             // {
             //     process.Kill();
@@ -104,15 +132,19 @@ namespace ServerGUI
 
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
+            
+            richTextBox.AppendText("\n Удаление сервиса \n");
             var process = new Process();
             var startInfo = new ProcessStartInfo
             {
                 WindowStyle = ProcessWindowStyle.Hidden,
                 FileName = "cmd.exe",
-                Arguments = @"/C sc delete BazisServer"
+                Arguments = @"/C sc delete LicenseServer"
             };
             process.StartInfo = startInfo;
             process.Start();
+            
+            richTextBox.AppendText("\n Сервис удалён \n");
         }
 
         private void addClient_Click(object sender, EventArgs e)
@@ -120,15 +152,15 @@ namespace ServerGUI
             dgv.Rows.Add();
         }
 
-        private void txbServer_Click(object sender, EventArgs e)
-        {
-            var openDialog = new OpenFileDialog();
-
-            if (openDialog.ShowDialog() == DialogResult.Cancel)
-                return;
-
-            txbServer.Text = openDialog.FileName;
-        }
+        // private void txbServer_Click(object sender, EventArgs e)
+        // {
+        //     var openDialog = new OpenFileDialog();
+        //
+        //     if (openDialog.ShowDialog() == DialogResult.Cancel)
+        //         return;
+        //
+        //     txbServer.Text = openDialog.FileName;
+        // }
 
         private void txbLog_Click(object sender, EventArgs e)
         {
@@ -148,6 +180,21 @@ namespace ServerGUI
                 return;
 
             txbKey.Text = openDialog.FileName;
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            richTextBox.AppendText("\n Начало работы сервиса \n");
+            var process = new Process();
+            var startInfo = new ProcessStartInfo
+            {
+                WindowStyle = ProcessWindowStyle.Hidden,
+                FileName = "cmd.exe",
+                Arguments = $@"/C sc start LicenseService",
+                Verb = "runas"
+            };
+            process.StartInfo = startInfo;
+            process.Start();
         }
     }
 }
