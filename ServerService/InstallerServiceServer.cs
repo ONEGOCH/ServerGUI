@@ -18,7 +18,7 @@ namespace ServiceServer
             
             processInstaller.Account = ServiceAccount.LocalSystem;
             serviceInstaller.StartType = ServiceStartMode.Automatic;
-            serviceInstaller.ServiceName = "LicenseService";
+            serviceInstaller.ServiceName = "BazisServer";
             
             Installers.Add(processInstaller);
             Installers.Add(serviceInstaller);

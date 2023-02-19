@@ -22,7 +22,7 @@ namespace ServerLogic
         private string[] args;
 
         private readonly TcpListener tcpListener;
-        private readonly StreamWriter streamWriter;
+        //private readonly StreamWriter streamWriter;
         private bool enable;
 
         public Service(string[] args)
@@ -58,9 +58,9 @@ namespace ServerLogic
         public void StopServer()
         {
             tcpListener.Stop();
-            streamWriter.Close();
+            //streamWriter.Close();
             enable = false;
-            File.AppendAllText(logFile, "Сервер остановлен");
+            File.AppendAllText(logFile, "\nСервер остановлен");
         }
 
         public void StartServer()
@@ -70,14 +70,10 @@ namespace ServerLogic
                 if (CheckLicense(licFile, out LicenseInfo licenseInfo))
                 {
                     tcpListener.Start(); // запускаем сервер
-                    Console.WriteLine($"Сервер запущен. IP : {localIp} {DateTime.Now}");
-                    Console.WriteLine(licenseInfo.CompanyName);
-                    Console.WriteLine(licenseInfo.ProductKey);
-                    Console.WriteLine(licenseInfo.KeyInfo.ToString());
-                    Console.WriteLine(licenseInfo.CompanyName);
-                    Console.WriteLine("Ожидание подключений... ");
-                    streamWriter.Close();
-                    streamWriter.Dispose();
+                    File.AppendAllText(logFile, $"\nСервер запущен. IP : {localIp} {DateTime.Now}");
+                    File.AppendAllText(logFile, "\nОжидание подключений... ");
+                    //streamWriter.Close();
+                    //streamWriter.Dispose();
 
                     while (enable)
                     {
@@ -86,16 +82,16 @@ namespace ServerLogic
                         new Thread(async () => await ProcessClientAsync(tcpClient)).Start();
                     }
                 }
-                else Console.WriteLine("Не найден подходящий сетевой адрес оборудования");
+                else File.AppendAllText(logFile, "\nНе найден подходящий сетевой адрес оборудования");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Ошибка : {ex.Message} {DateTime.Now}");
-                Console.ReadLine();
+                File.AppendAllText(logFile, $"\nОшибка : {ex.Message} {DateTime.Now}");
+                //Console.ReadLine();
             }
             finally
             {
-                Console.WriteLine("Сервер остановлен");
+                File.AppendAllText(logFile, "\nСервер остановлен");
             }
         }
 
@@ -151,7 +147,7 @@ namespace ServerLogic
                 }
 
                 Console.WriteLine($"Сеанс завершен. IP : {tcpClient.Client.RemoteEndPoint}");
-                Console.WriteLine("...Ожидание подключений...");
+                Console.WriteLine("Ожидание подключений...");
                 Console.WriteLine("|------------------------|");
             }
         }

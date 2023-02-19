@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1684
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerGUI", "ServerGUI.csproj", "{AF51D305-FFA8-4644-ADD7-1FB85FF59D75}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceServer", "ServerService\ServiceServer.csproj", "{3B700689-09F6-4B05-8EFC-ABFDD650ABD5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerLogic", "ServerService\ServerLogic\ServerLogic.csproj", "{08AB9AB5-ED4C-4777-9E0F-2A08AFE19A41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LicenseInfoReader", "LicenseInfoReader\LicenseInfoReader.csproj", "{103590E5-F564-4E12-9B84-40B730863829}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{08AB9AB5-ED4C-4777-9E0F-2A08AFE19A41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08AB9AB5-ED4C-4777-9E0F-2A08AFE19A41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08AB9AB5-ED4C-4777-9E0F-2A08AFE19A41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{103590E5-F564-4E12-9B84-40B730863829}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{103590E5-F564-4E12-9B84-40B730863829}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{103590E5-F564-4E12-9B84-40B730863829}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{103590E5-F564-4E12-9B84-40B730863829}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
