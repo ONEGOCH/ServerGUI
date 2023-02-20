@@ -24,25 +24,14 @@ namespace ServerGUI
             this.Text = "Версия " + $"{ver.Major}.{ver.Minor}.{ver.Build}";
         }
 
-        private void btnCreate_Click(object sender, EventArgs e)
+        private void BtnCreate_Click(object sender, EventArgs e)
         {
             try
             {
+                CreateConfig();
+
                 var bit = Environment.Is64BitOperatingSystem ? "64" : "";
-                richTextBox.AppendText("\nСоздание сервиса...");
-                var config = new ServiceConfig
-                {
-                    port = txbPort.Text,
-                    clientsIp = new List<DataGridViewRow>(dgv.Rows.Cast<DataGridViewRow>())
-                        .Select(x => x.Cells[0].Value.ToString())
-                        .ToList(),
-                    licFile = txbKey.Text,
-                    logFile = txbLog.Text
-                };
-                var configString = JsonConvert.SerializeObject(config);
-                File.WriteAllText("serverConfig.json", configString);
-                if (config.clientsIp.Count == 0)
-                    throw new Exception("Укажите хотя бы одного клиента!");
+                lblToolStrip.Text = "Создание сервиса...";
 
                 var process = new Process();
                 var currentDirectory = Directory.GetCurrentDirectory();
@@ -57,7 +46,7 @@ namespace ServerGUI
                 process.StartInfo = startInfo;
 
                 process.Start();
-                richTextBox.AppendText("\nСервис создан");
+                lblToolStrip.Text = "Сервис создан";
 
             }
             catch (Exception ex)
@@ -65,7 +54,24 @@ namespace ServerGUI
                 MessageBox.Show(ex.Message);
             }
         }
-        
+
+        private void CreateConfig()
+        {
+            var config = new ServiceConfig
+            {
+                port = txbPort.Text,
+                clientsIp = new List<DataGridViewRow>(dgv.Rows.Cast<DataGridViewRow>())
+                    .Select(x => x.Cells[0].Value.ToString())
+                    .ToList(),
+                licFile = txbKey.Text,
+                logFile = txbLog.Text
+            };
+            var configString = JsonConvert.SerializeObject(config);
+            File.WriteAllText("serverConfig.json", configString);
+            if (config.clientsIp.Count == 0)
+                throw new Exception("Укажите хотя бы одного клиента!");
+        }
+
         private void InfoBtb_Click(object sender, EventArgs e)
         {
             try
@@ -104,7 +110,7 @@ namespace ServerGUI
                 };
                 process.StartInfo = startInfo;
                 process.Start();
-                richTextBox.AppendText("\nСервис остановлен");
+                lblToolStrip.Text = "Сервис остановлен";
             }
             catch (Exception)
             {
@@ -114,8 +120,7 @@ namespace ServerGUI
 
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
-            
-            richTextBox.AppendText("\nУдаление сервиса...");
+            lblToolStrip.Text = "Удаление сервиса...";
             var process = new Process();
             var startInfo = new ProcessStartInfo
             {
@@ -126,8 +131,8 @@ namespace ServerGUI
             };
             process.StartInfo = startInfo;
             process.Start();
-            
-            richTextBox.AppendText("\nСервис удалён");
+
+            lblToolStrip.Text = "Сервис удалён";
         }
 
         private void BtnAddClient_Click(object sender, EventArgs e)
@@ -135,7 +140,7 @@ namespace ServerGUI
             dgv.Rows.Add();
         }
 
-        private void txbLog_Click(object sender, EventArgs e)
+        private void TxbLog_Click(object sender, EventArgs e)
         {
             var openDialog = new OpenFileDialog();
 
@@ -145,7 +150,7 @@ namespace ServerGUI
             txbLog.Text = openDialog.FileName;
         }
 
-        private void txbKey_Click(object sender, EventArgs e)
+        private void TxbKey_Click(object sender, EventArgs e)
         {
             var openDialog = new OpenFileDialog();
 
@@ -155,9 +160,9 @@ namespace ServerGUI
             txbKey.Text = openDialog.FileName;
         }
 
-        private void btnStart_Click(object sender, EventArgs e)
+        private void BtnStart_Click(object sender, EventArgs e)
         {
-            richTextBox.AppendText("\nНачало работы сервиса");
+            lblToolStrip.Text = "Начало работы сервиса...";
             var process = new Process();
             var startInfo = new ProcessStartInfo
             {
@@ -168,9 +173,10 @@ namespace ServerGUI
             };
             process.StartInfo = startInfo;
             process.Start();
+            lblToolStrip.Text = "Сервис запущен";
         }
 
-        private void btnInfoLic_Click(object sender, EventArgs e)
+        private void BtnInfoLic_Click(object sender, EventArgs e)
         {
             try
             {
@@ -200,7 +206,7 @@ namespace ServerGUI
             }
         }
 
-        private void btnLoadConfig_Click(object sender, EventArgs e)
+        private void BtnLoadConfig_Click(object sender, EventArgs e)
         {
             try
             {
@@ -221,6 +227,18 @@ namespace ServerGUI
                 else
                     throw new SerializationException();
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void BtnSaveConfig_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CreateConfig();
             }
             catch (Exception ex)
             {
