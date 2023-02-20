@@ -34,14 +34,14 @@ namespace ServerGUI
                 lblToolStrip.Text = "Создание сервиса...";
 
                 var process = new Process();
-                var currentDirectory = Directory.GetCurrentDirectory();
                 var startInfo = new ProcessStartInfo
                 {
-                    WindowStyle = ProcessWindowStyle.Hidden,
+                    WindowStyle = ProcessWindowStyle.Normal,
                     FileName = "cmd.exe",
                     Arguments =
-                        $@"/C setx /m LicenseServerPath {currentDirectory} && C:\Windows\Microsoft.NET\Framework{bit}\v4.0.30319\InstallUtil.exe {currentDirectory}\ServiceServer.exe",
-                    Verb = "runas"
+                        $@"/C setx /m LicenseServerPath {txbService.Text} && C:\Windows\Microsoft.NET\Framework{bit}\v4.0.30319\InstallUtil.exe {txbService.Text}\ServiceServer.exe",
+                    Verb = "runas",
+                    ErrorDialog = true
                 };
                 process.StartInfo = startInfo;
 
@@ -67,9 +67,12 @@ namespace ServerGUI
                 logFile = txbLog.Text
             };
             var configString = JsonConvert.SerializeObject(config);
-            File.WriteAllText("serverConfig.json", configString);
+
+            File.WriteAllText($@"{txbService.Text}\serverConfig.json", configString);
             if (config.clientsIp.Count == 0)
                 throw new Exception("Укажите хотя бы одного клиента!");
+
+            lblToolStrip.Text = $@"Конфигурация сохранена в {txbService.Text}\serverConfig.json";
         }
 
         private void InfoBtb_Click(object sender, EventArgs e)
@@ -244,6 +247,16 @@ namespace ServerGUI
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void TxbService_Click(object sender, EventArgs e)
+        {
+            var openDialog = new FolderBrowserDialog();
+
+            if (openDialog.ShowDialog() == DialogResult.Cancel)
+                return;
+
+            txbService.Text = openDialog.SelectedPath;
         }
     }
 }

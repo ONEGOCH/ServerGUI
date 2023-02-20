@@ -11,7 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerLogic", "ServerServic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LicenseInfoReader", "LicenseInfoReader\LicenseInfoReader.csproj", "{103590E5-F564-4E12-9B84-40B730863829}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupServer", "SetupServer\SetupServer.vdproj", "{444094AE-B57D-4045-BEBC-BC7FAD6ACC13}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ServerSetup", "..\ServerSetup\ServerSetup.vdproj", "{5B2C74C6-0926-4F9C-844A-F23513A27AC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerTest", "ServerTest\ServerTest.csproj", "{53001AB8-BCD1-4E49-B54E-3F0908166E19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,9 +37,13 @@ Global
 		{103590E5-F564-4E12-9B84-40B730863829}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{103590E5-F564-4E12-9B84-40B730863829}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{103590E5-F564-4E12-9B84-40B730863829}.Release|Any CPU.Build.0 = Release|Any CPU
-		{444094AE-B57D-4045-BEBC-BC7FAD6ACC13}.Debug|Any CPU.ActiveCfg = Debug
-		{444094AE-B57D-4045-BEBC-BC7FAD6ACC13}.Release|Any CPU.ActiveCfg = Release
-		{444094AE-B57D-4045-BEBC-BC7FAD6ACC13}.Release|Any CPU.Build.0 = Release
+		{5B2C74C6-0926-4F9C-844A-F23513A27AC3}.Debug|Any CPU.ActiveCfg = Debug
+		{5B2C74C6-0926-4F9C-844A-F23513A27AC3}.Release|Any CPU.ActiveCfg = Release
+		{5B2C74C6-0926-4F9C-844A-F23513A27AC3}.Release|Any CPU.Build.0 = Release
+		{53001AB8-BCD1-4E49-B54E-3F0908166E19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53001AB8-BCD1-4E49-B54E-3F0908166E19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53001AB8-BCD1-4E49-B54E-3F0908166E19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53001AB8-BCD1-4E49-B54E-3F0908166E19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

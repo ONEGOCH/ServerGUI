@@ -91,7 +91,7 @@ namespace ServerLogic
             }
             finally
             {
-                File.AppendAllText(logFile, "\nСервер остановлен");
+                File.AppendAllText(logFile, "\nИсправьте ошибки и перезапустите сервис");
             }
         }
 
@@ -152,7 +152,7 @@ namespace ServerLogic
             }
         }
 
-        public static string CheckResponse(string action, string licFile)
+        public string CheckResponse(string action, string licFile)
         {
             try
             {
@@ -183,13 +183,17 @@ namespace ServerLogic
             }
         }
 
-        public static bool CheckLicense(string licFile, out LicenseInfo licInfo)
+        public bool CheckLicense(string licFile, out LicenseInfo licInfo)
         {
             var kManager = new KeyManager();
             //Load lic file
             licInfo = kManager.LoadFile(licFile);
 
             //Check license file
+
+            if (clientsIp.Count > licInfo.KeyInfo.NumberOfClients)
+                throw new Exception("Превышено допустимое количество клиентов");
+
             return kManager.ValidKey(licInfo.KeyInfo);
         }
     }

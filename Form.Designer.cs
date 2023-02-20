@@ -43,9 +43,11 @@
             this.btnLoadConfig = new System.Windows.Forms.Button();
             this.btnSaveConfig = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.txbService = new System.Windows.Forms.TextBox();
             this.txbKey = new System.Windows.Forms.TextBox();
             this.txbLog = new System.Windows.Forms.TextBox();
             this.txbPort = new System.Windows.Forms.TextBox();
@@ -117,9 +119,9 @@
             this.IpAdr});
             this.tableLayoutPanel1.SetColumnSpan(this.dgv, 2);
             this.dgv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv.Location = new System.Drawing.Point(307, 198);
+            this.dgv.Location = new System.Drawing.Point(307, 248);
             this.dgv.Name = "dgv";
-            this.dgv.Size = new System.Drawing.Size(355, 275);
+            this.dgv.Size = new System.Drawing.Size(355, 225);
             this.dgv.TabIndex = 4;
             // 
             // IpAdr
@@ -201,13 +203,13 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(355, 189);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(355, 239);
             this.tableLayoutPanel2.TabIndex = 4;
             // 
             // btnAddClient
             // 
             this.btnAddClient.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAddClient.Location = new System.Drawing.Point(3, 152);
+            this.btnAddClient.Location = new System.Drawing.Point(3, 202);
             this.btnAddClient.Name = "btnAddClient";
             this.btnAddClient.Size = new System.Drawing.Size(112, 34);
             this.btnAddClient.TabIndex = 2;
@@ -218,7 +220,7 @@
             // btnLoadConfig
             // 
             this.btnLoadConfig.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnLoadConfig.Location = new System.Drawing.Point(121, 152);
+            this.btnLoadConfig.Location = new System.Drawing.Point(121, 202);
             this.btnLoadConfig.Name = "btnLoadConfig";
             this.btnLoadConfig.Size = new System.Drawing.Size(112, 34);
             this.btnLoadConfig.TabIndex = 2;
@@ -229,7 +231,7 @@
             // btnSaveConfig
             // 
             this.btnSaveConfig.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSaveConfig.Location = new System.Drawing.Point(239, 152);
+            this.btnSaveConfig.Location = new System.Drawing.Point(239, 202);
             this.btnSaveConfig.Name = "btnSaveConfig";
             this.btnSaveConfig.Size = new System.Drawing.Size(113, 34);
             this.btnSaveConfig.TabIndex = 3;
@@ -242,22 +244,35 @@
             this.panel1.AutoSize = true;
             this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel2.SetColumnSpan(this.panel1, 3);
+            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.txbService);
             this.panel1.Controls.Add(this.txbKey);
             this.panel1.Controls.Add(this.txbLog);
             this.panel1.Controls.Add(this.txbPort);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(349, 143);
+            this.panel1.Size = new System.Drawing.Size(349, 193);
             this.panel1.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(14, 95);
+            this.label3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(45, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Служба";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 86);
+            this.label1.Location = new System.Drawing.Point(14, 137);
+            this.label1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 13);
             this.label1.TabIndex = 3;
@@ -266,7 +281,8 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 48);
+            this.label4.Location = new System.Drawing.Point(14, 53);
+            this.label4.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(26, 13);
             this.label4.TabIndex = 1;
@@ -281,11 +297,22 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Порт";
             // 
+            // txbService
+            // 
+            this.txbService.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txbService.Location = new System.Drawing.Point(3, 111);
+            this.txbService.Name = "txbService";
+            this.txbService.Size = new System.Drawing.Size(345, 20);
+            this.txbService.TabIndex = 0;
+            this.txbService.Text = "Укажите путь до службы ServiceServer";
+            this.txbService.Click += new System.EventHandler(this.TxbService_Click);
+            // 
             // txbKey
             // 
             this.txbKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txbKey.Location = new System.Drawing.Point(3, 103);
+            this.txbKey.Location = new System.Drawing.Point(3, 153);
             this.txbKey.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
             this.txbKey.Name = "txbKey";
             this.txbKey.Size = new System.Drawing.Size(345, 20);
@@ -297,7 +324,7 @@
             // 
             this.txbLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txbLog.Location = new System.Drawing.Point(3, 65);
+            this.txbLog.Location = new System.Drawing.Point(3, 69);
             this.txbLog.Name = "txbLog";
             this.txbLog.Size = new System.Drawing.Size(345, 20);
             this.txbLog.TabIndex = 0;
@@ -380,6 +407,8 @@
         private System.Windows.Forms.Button btnSaveConfig;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblToolStrip;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txbService;
         //private System.Windows.Forms.CheckBox chbRunOnBackGround;
     }
 }
